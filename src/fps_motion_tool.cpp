@@ -30,16 +30,16 @@ namespace fps_motion_tool
 
 FPSMotionTool::FPSMotionTool()
 {
-    shortcut_key_ = 'q';
-    m_config_widget = NULL;
+	shortcut_key_ = 'q';
+	m_config_widget = NULL;
 }
 
 FPSMotionTool::~FPSMotionTool()
 {
-    if (m_config_widget != NULL)
-    {
-        delete m_config_widget;
-    }
+	if (m_config_widget != NULL)
+	{
+		delete m_config_widget;
+	}
 }
 
 // onInitialize() is called by the superclass after scene_manager_ and
@@ -52,7 +52,7 @@ void FPSMotionTool::onInitialize()
 
 void FPSMotionTool::activate() 
 {
-    m_config_widget = new FPSMotionConfigWidget(this);
+	m_config_widget = new FPSMotionConfigWidget(this);
 }
 
 void FPSMotionTool::deactivate() 
@@ -62,59 +62,64 @@ void FPSMotionTool::deactivate()
 // Handling key events to label marked faces or to get db structure
 int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
 {
-	std::cout << "m offset " << m_pos_offset << std::endl; 
-	if (event->key() == Qt::Key_W)
-    {
-		if(m_fly)
-			((rviz::FPSMotionViewController*) panel->getViewController())->fly(0.0, 0.0, -m_pos_offset);
-		else
-			((rviz::FPSMotionViewController*) panel->getViewController())->move(0.0, 0.0, -m_pos_offset);
-    }
-    
-    if (event->key() == Qt::Key_A)
-    {
-		if(m_fly)
-		((rviz::FPSMotionViewController*) panel->getViewController())->fly(-m_pos_offset, 0.0, 0.0);
-		else
-		((rviz::FPSMotionViewController*) panel->getViewController())->move(-m_pos_offset, 0.0, 0.0);
-    }
-	
-	if (event->key() == Qt::Key_S)
-    {
-		if(m_fly)
-			((rviz::FPSMotionViewController*) panel->getViewController())->fly(0.0, 0.0, m_pos_offset);
-		else
-			((rviz::FPSMotionViewController*) panel->getViewController())->move(0.0, 0.0, m_pos_offset);
-    }
-    
-    if (event->key() == Qt::Key_D)
-    {
-		if(m_fly)
-			((rviz::FPSMotionViewController*) panel->getViewController())->fly(m_pos_offset, 0.0, 0.0);
-		else
-			((rviz::FPSMotionViewController*) panel->getViewController())->move(m_pos_offset, 0.0, 0.0);
-    }
+	if(panel->getViewController()->getClassId().toStdString() != "rviz/FPSMotionViewController")
+	{
+		ROS_WARN("The FPS Motion Tool only works with an active rviz/FPSMotionViewController. \n Guess we need to automatize switching the ViewControllers someday... :D");
+	}
+	else
+	{
+		if (event->key() == Qt::Key_W)
+		{
+			if(m_fly)
+				((rviz::FPSMotionViewController*) panel->getViewController())->fly(0.0, 0.0, -m_pos_offset);
+			else
+				((rviz::FPSMotionViewController*) panel->getViewController())->move(0.0, 0.0, -m_pos_offset);
+		}
 
-    // if 'f' is pressed switch walk/fly mode
-    if (event->key() == Qt::Key_F)
-    {
-        m_fly = !m_fly;
-    }
+		if (event->key() == Qt::Key_A)
+		{
+			if(m_fly)
+			((rviz::FPSMotionViewController*) panel->getViewController())->fly(-m_pos_offset, 0.0, 0.0);
+			else
+			((rviz::FPSMotionViewController*) panel->getViewController())->move(-m_pos_offset, 0.0, 0.0);
+		}
 
-    // if 'r' is pressed reset the view
-    if (event->key() == Qt::Key_R)
-    {
-		m_fly = false;
-        ((rviz::FPSMotionViewController*) panel->getViewController())->reset();
-    }
+		if (event->key() == Qt::Key_S)
+		{
+			if(m_fly)
+				((rviz::FPSMotionViewController*) panel->getViewController())->fly(0.0, 0.0, m_pos_offset);
+			else
+				((rviz::FPSMotionViewController*) panel->getViewController())->move(0.0, 0.0, m_pos_offset);
+		}
 
-    // if 't' is pressed open the config widget
-    if (event->key() == Qt::Key_T)
-    {
-		m_config_widget->exec();
-    }
-    
-    return Render;
+		if (event->key() == Qt::Key_D)
+		{
+			if(m_fly)
+				((rviz::FPSMotionViewController*) panel->getViewController())->fly(m_pos_offset, 0.0, 0.0);
+			else
+				((rviz::FPSMotionViewController*) panel->getViewController())->move(m_pos_offset, 0.0, 0.0);
+		}
+
+		// if 'f' is pressed switch walk/fly mode
+		if (event->key() == Qt::Key_F)
+		{
+			m_fly = !m_fly;
+		}
+
+		// if 'r' is pressed reset the view
+		if (event->key() == Qt::Key_R)
+		{
+			m_fly = false;
+			((rviz::FPSMotionViewController*) panel->getViewController())->reset();
+		}
+
+		// if 't' is pressed open the config widget
+		if (event->key() == Qt::Key_T)
+		{
+			m_config_widget->exec();
+		}
+	}
+	return Render;
 }
 
 // Handling mouse event and mark the clicked faces
@@ -122,8 +127,8 @@ int FPSMotionTool::processMouseEvent(rviz::ViewportMouseEvent& event)
 {
   if (event.panel->getViewController())
   {
-    event.panel->getViewController()->handleMouseEvent(event);
-    setCursor( event.panel->getViewController()->getCursor() );
+	event.panel->getViewController()->handleMouseEvent(event);
+	setCursor( event.panel->getViewController()->getCursor() );
   }
   return 0;
 }

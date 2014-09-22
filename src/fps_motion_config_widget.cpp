@@ -60,13 +60,14 @@ FPSMotionConfigWidget::~FPSMotionConfigWidget()
 
 void FPSMotionConfigWidget::exec()
 {
-	QDialog::exec();
+	//QDialog::exec();
 }
 
 void FPSMotionConfigWidget::saveButtonClicked()
 {
-	bool* ok;
-	std::cout << "new " << m_offset_edit->text().toDouble(ok) << std::endl;
+	//bool* ok;
+	//double value = m_offset_edit->text().toDouble();
+	//std::cout << "new " <<  << std::endl;
 	m_parent_tool->setOffset(4.0);
 	this->hide();
 }

@@ -105,8 +105,8 @@ void FPSMotionViewController::handleMouseEvent(ViewportMouseEvent& event)
   if( event.left() )
   {
     setCursor( Rotate3D );
-    yaw( -diff_x*0.005 );
-    pitch( diff_y*0.005 );
+    yaw( -diff_x * 0.005 );
+    pitch( diff_y * 0.005 );
   }
 
   if (moved)

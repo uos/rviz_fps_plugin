@@ -1,2 +1,2 @@
-fps_motion_tool
+rviz_fps_plugin
 ===============

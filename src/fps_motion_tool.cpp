@@ -25,7 +25,7 @@
  */
 #include <fps_motion_tool.h>
 
-namespace fps_motion_tool
+namespace rviz
 {
 
 FPSMotionTool::FPSMotionTool()
@@ -133,7 +133,7 @@ int FPSMotionTool::processMouseEvent(rviz::ViewportMouseEvent& event)
   return 0;
 }
 
-} // end namespace rviz_egomotion_tool
+} // end namespace rviz
 
 #include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS(fps_motion_tool::FPSMotionTool, rviz::Tool )
+PLUGINLIB_EXPORT_CLASS(rviz::FPSMotionTool, rviz::Tool )

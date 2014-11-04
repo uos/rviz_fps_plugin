@@ -25,7 +25,7 @@
  */
 
 #include <fps_motion_config_widget.h>
-namespace fps_motion_tool
+namespace rviz
 {
 
 FPSMotionConfigWidget::FPSMotionConfigWidget(FPSMotionTool* parent_tool)
@@ -68,7 +68,5 @@ void FPSMotionConfigWidget::saveButtonClicked()
 	//bool* ok;
 	//double value = m_offset_edit->text().toDouble();
 	//std::cout << "new " <<  << std::endl;
-	m_parent_tool->setOffset(4.0);
-	this->hide();
 }
 }

@@ -69,7 +69,7 @@ class SceneNode;
 class Vector3;
 }
 
-namespace fps_motion_tool
+namespace rviz
 {
      
 class FPSMotionConfigWidget;
@@ -91,11 +91,11 @@ public:
 
 private:
 	ros::NodeHandle n_;
-	fps_motion_tool::FPSMotionConfigWidget* m_config_widget;
+	rviz::FPSMotionConfigWidget* m_config_widget;
 	Ogre::SceneNode* m_sceneNode;
 	bool m_fly;
 	bool m_fly_by_default;
     double m_pos_offset;    
 };
-} // end namespace fps_motion_tool
+} // end namespace rviz
 #endif

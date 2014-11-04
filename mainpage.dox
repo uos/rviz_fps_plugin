@@ -2,7 +2,7 @@
 \mainpage
 \htmlinclude manifest.html
 
-\b fps_motion_tool 
+\b rviz_fps_plugin 
 
 <!-- 
 Provide an overview of your package.

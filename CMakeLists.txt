@@ -37,7 +37,7 @@ set(SOURCE_FILES
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 # add postgis_control so
-link_directories(/usr/lib ${postgis_control_PACKAGE_PATH}/lib)
+#link_directories(/usr/lib ${postgis_control_PACKAGE_PATH}/lib)
 
 ## An rviz plugin is just a shared library, so here we declare the
 ## library to be called ``${PROJECT_NAME}`` 

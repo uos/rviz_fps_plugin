@@ -45,7 +45,7 @@
  *
  */
 
-namespace fps_motion_tool
+namespace rviz
 {
 class FPSMotionTool;
 class FPSMotionConfigWidget: public QDialog
@@ -67,5 +67,5 @@ private:
     FPSMotionTool* m_parent_tool;
     QLineEdit* m_offset_edit;
 };
-}
+} // end namespace rviz
 #endif

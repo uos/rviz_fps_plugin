@@ -92,6 +92,6 @@ protected:
   BoolProperty* fly_property_;
 };
 
-} // end namespace
+} // end namespace rviz
 
 #endif // FPS_MOTION_VIEW_CONTROLLER

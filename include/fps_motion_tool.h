@@ -36,12 +36,15 @@
 #include <ros/console.h>
 #include <rviz/viewport_mouse_event.h>
 #include <rviz/visualization_manager.h>
-#include <rviz/mesh_loader.h>
 #include <rviz/geometry.h>
 #include <rviz/properties/vector_property.h>
 #include <rviz/tool.h>
 #include <rviz/tool_manager.h>
 #include <rviz/display_group.h>
+
+#ifndef Q_MOC_RUN
+#include <rviz/mesh_loader.h>
+#endif
 
 #include "rviz/display_context.h"
 #include "rviz/render_panel.h"

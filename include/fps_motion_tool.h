@@ -41,20 +41,15 @@
 #include <rviz/tool.h>
 #include <rviz/tool_manager.h>
 #include <rviz/display_group.h>
+#include <rviz/display_context.h>
+#include <rviz/render_panel.h>
+#include <rviz/viewport_mouse_event.h>
+#include <rviz/selection/selection_manager.h>
+#include <rviz/view_controller.h>
+#include <rviz/view_manager.h>
+#include <rviz/load_resource.h>
 
-#ifndef Q_MOC_RUN
-#include <rviz/mesh_loader.h>
-#endif
-
-#include "rviz/display_context.h"
-#include "rviz/render_panel.h"
-#include "rviz/viewport_mouse_event.h"
-#include "rviz/selection/selection_manager.h"
-#include "rviz/view_controller.h"
-#include "rviz/view_manager.h"
-#include "rviz/load_resource.h"
-
-#include "rviz/default_plugin/tools/move_tool.h"
+#include <rviz/default_plugin/tools/move_tool.h>
 
 #include <fps_motion_view_controller.h>
 #include <fps_motion_config_widget.h>

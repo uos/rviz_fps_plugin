@@ -1,12 +1,12 @@
 <library path="lib/librviz_fps_plugin">
   <class name="rviz/FPSMotion" type="rviz::FPSMotionViewController" base_class_type="rviz::ViewController">
     <description>
-      Control the camera like in a First Person Shooter game: drag left to look left, etc.
+      Control the camera like in a FPS game by using the corresponding FPSMotionTool.
     </description>
   </class>
-  <class name="rviz/FPSTool" type="rviz::FPSMotionTool" base_class_type="rviz::Tool">
+  <class name="rviz/FPSMotionTool" type="rviz::FPSMotionTool" base_class_type="rviz::Tool">
     <description>
-      Tool to move in an ego-shooter like mode
+      Tool to move in an ego-shooter like mode. This tool requires the corresponding FPSMotionViewController.
     </description>
   </class>
 </library>

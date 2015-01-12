@@ -1,0 +1,20 @@
+<package>
+  <name>rviz_fps_plugin</name>
+  <version>0.1.0</version>
+  <description>
+    The rviz_fps_plugin package contains an additional ViewController and a Tool Plugin to navigate RViz like an FPS-Shooter.
+
+    To enable the tool press 'q' and enable the 'FPSMotion' ViewController. Use the 'wasd' keys for walking.
+    By pressing 'f' one can switch between walk or fly mode. By pressing 'r' you can reset the view controller.
+  </description>
+  <license>BSD</license>
+  <url>http://ros.org/wiki/rviz_fps_plugin</url>
+  <author>hdeeken</author>
+  <maintainer email="hdeeken@uni-osnabrueck.de">Henning Deeken</maintainer>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rviz</build_depend>
+  <run_depend>rviz</run_depend>
+  <export>
+    <rviz plugin="${prefix}/plugin_description.xml"/>
+  </export>
+</package>

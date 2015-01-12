@@ -8,14 +8,14 @@
  *
  * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in 
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in
  * the documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT 
- * NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
- * THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
- * DAMAGES  (INCLUDING,  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
- * BUSINESS  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
+ * NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+ * THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES  (INCLUDING,  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ * BUSINESS  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE   OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * fps_motion_tool.cpp
@@ -30,7 +30,7 @@
 #include <vector>
 #include <map>
 #include <QMessageBox>
-#include <QApplication> 
+#include <QApplication>
 #include <QIcon>
 
 #include <ros/console.h>
@@ -60,9 +60,9 @@
 #include <fps_motion_config_widget.h>
 
 /**
- * 
+ *
  *@class FPSMotionTool
- * 
+ *
  *@brief Implements a rviz tool that allows to navigate in a egoshooter mode.
  */
 
@@ -74,31 +74,31 @@ class Vector3;
 
 namespace rviz
 {
-     
+
 class FPSMotionConfigWidget;
 class FPSMotionTool: public rviz::Tool
 {
 Q_OBJECT
 public:
-    FPSMotionTool();
-    ~FPSMotionTool();
-    virtual void onInitialize();
-    virtual void activate();
-    virtual void deactivate();
+  FPSMotionTool();
+  ~FPSMotionTool();
+  virtual void onInitialize();
+  virtual void activate();
+  virtual void deactivate();
 
-    virtual int processKeyEvent(QKeyEvent* event, rviz::RenderPanel* panel);
-    virtual int processMouseEvent(rviz::ViewportMouseEvent& event);
+  virtual int processKeyEvent(QKeyEvent* event, rviz::RenderPanel* panel);
+  virtual int processMouseEvent(rviz::ViewportMouseEvent& event);
 
-	double getOffset() { return m_pos_offset;}
-	void setOffset(double offset) {m_pos_offset = offset;}
+  double getOffset() { return m_pos_offset;}
+  void setOffset(double offset) {m_pos_offset = offset;}
 
 private:
-	ros::NodeHandle n_;
-	rviz::FPSMotionConfigWidget* m_config_widget;
-	Ogre::SceneNode* m_sceneNode;
-	bool m_fly;
-	bool m_fly_by_default;
-    double m_pos_offset;    
+  ros::NodeHandle n_;
+  rviz::FPSMotionConfigWidget* m_config_widget;
+  Ogre::SceneNode* m_sceneNode;
+  bool m_fly;
+  bool m_fly_by_default;
+  double m_pos_offset;
 };
 } // end namespace rviz
 #endif

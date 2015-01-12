@@ -75,7 +75,7 @@ public:
 
   virtual void update(float dt, float ros_dt);
 
-   void setCamera( Ogre::Camera* source_camera ) { setPropertiesFromCamera(source_camera );};
+  void setCamera( Ogre::Camera* source_camera ) { setPropertiesFromCamera(source_camera );};
 
 protected:
   virtual void onTargetFrameChanged(const Ogre::Vector3& old_reference_position, const Ogre::Quaternion& old_reference_orientation);

@@ -58,12 +58,11 @@ static const float PITCH_LIMIT_HIGH = Ogre::Math::HALF_PI - 0.001;
 FPSMotionViewController::FPSMotionViewController()
 {
   yaw_property_ = new FloatProperty( "Yaw", 0, "Rotation of the camera around the Z (up) axis.", this );
-
   pitch_property_ = new FloatProperty( "Pitch", 0, "How much the camera is tipped downward.", this );
   pitch_property_->setMax( Ogre::Math::HALF_PI - 0.001 );
   pitch_property_->setMin( -pitch_property_->getMax() );
   //fly_property_ = new BoolProperty("Fly Mode", true, this, 0,0);
-  
+
   position_property_ = new VectorProperty( "Position", Ogre::Vector3( 5, 5, 10 ), "Position of the camera.", this );
 }
 

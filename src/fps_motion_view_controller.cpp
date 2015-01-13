@@ -34,16 +34,16 @@
 #include <OgreSceneManager.h>
 #include <OgreCamera.h>
 
-#include "rviz/uniform_string_stream.h"
-#include "rviz/display_context.h"
-#include "rviz/viewport_mouse_event.h"
-#include "rviz/geometry.h"
-#include "rviz/ogre_helpers/shape.h"
-#include "rviz/properties/float_property.h"
-#include "rviz/properties/vector_property.h"
-#include "rviz/properties/bool_property.h"
+#include <rviz/uniform_string_stream.h>
+#include <rviz/display_context.h>
+#include <rviz/viewport_mouse_event.h>
+#include <rviz/geometry.h>
+#include <rviz/ogre_helpers/shape.h>
+#include <rviz/properties/float_property.h>
+#include <rviz/properties/vector_property.h>
+#include <rviz/properties/bool_property.h>
 
-#include "fps_motion_view_controller.h"
+#include <fps_motion_view_controller.h>
 
 namespace rviz
 {
@@ -58,12 +58,12 @@ static const float PITCH_LIMIT_HIGH = Ogre::Math::HALF_PI - 0.001;
 FPSMotionViewController::FPSMotionViewController()
 {
   yaw_property_ = new FloatProperty( "Yaw", 0, "Rotation of the camera around the Z (up) axis.", this );
-  pitch_property_ = new FloatProperty( "Pitch", 0, "How much the camera is tipped downward.", this );
+  pitch_property_ = new FloatProperty( "Pitch", 0, "How much the camera is tipped downward.", this);
   pitch_property_->setMax( Ogre::Math::HALF_PI - 0.001 );
   pitch_property_->setMin( -pitch_property_->getMax() );
-  //fly_property_ = new BoolProperty("Fly Mode", true, this, 0,0);
 
   position_property_ = new VectorProperty( "Position", Ogre::Vector3( 5, 5, 10 ), "Position of the camera.", this );
+
 }
 
 FPSMotionViewController::~FPSMotionViewController()
@@ -83,7 +83,7 @@ void FPSMotionViewController::reset()
   setPropertiesFromCamera( camera_ );
 
   updateCamera();
-  camera_->lookAt( -1.0, 0.0, 1.75); //-2*Ogre::Math::PI, Ogre::Math::HALF_PI, 0.0 );
+  camera_->lookAt( -1.0, 0.0, 1.75);
   setPropertiesFromCamera( camera_ );
 }
 

@@ -19,7 +19,7 @@ add_definitions(-DQT_NO_KEYWORDS)
 ## Qt's meta-object compiler.
 qt4_wrap_cpp(MOC_FILES
   include/fps_motion_view_controller.h
-  include/fps_motion_config_widget.h
+  #include/fps_motion_config_widget.h
   include/fps_motion_tool.h
 )
 
@@ -39,7 +39,7 @@ include_directories(
 ## the previous command which is stored in ``${MOC_FILES}``.
 set(SOURCE_FILES
   src/fps_motion_view_controller.cpp
-  src/fps_motion_config_widget.cpp
+  #src/fps_motion_config_widget.cpp
   src/fps_motion_tool.cpp
   ${MOC_FILES}
 )

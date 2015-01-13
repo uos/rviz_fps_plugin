@@ -1,6 +1,6 @@
 /*
  * UOS-ROS packages - Robot Operating System code by the University of Osnabrück
- * Copyright (C) 2013 University of Osnabrück
+ * Copyright (C) 2014 University of Osnabrück
  *
  * All rights reserved.
  *
@@ -32,16 +32,9 @@ namespace rviz
 FPSMotionTool::FPSMotionTool()
 {
   shortcut_key_ = 'q';
-  m_config_widget = NULL;
 }
 
-FPSMotionTool::~FPSMotionTool()
-{
-  if (m_config_widget != NULL)
-  {
-    delete m_config_widget;
-  }
-}
+FPSMotionTool::~FPSMotionTool() {}
 
 // onInitialize() is called by the superclass after scene_manager_ and
 // context_ are set.  It should be called only once per instantiation.
@@ -49,16 +42,69 @@ void FPSMotionTool::onInitialize()
 {
   setName( "FPS Motion" );
   m_pos_offset = 0.1;
-  m_fly = false;
+  m_fly_mode = false;
+
+  setFallbackToolProperty();
+  setFallbackViewControllerProperty();
+}
+
+void FPSMotionTool::setFallbackViewControllerProperty()
+{
+  fallback_view_controller_property_->clearOptions();
+  m_view_controller_classes.clear();
+
+  m_view_controller_classes = context_->getViewManager()->getFactory()->getDeclaredClassIds();
+
+  for( int i = 0; i < m_view_controller_classes.size(); i++ )
+  {
+    if(m_view_controller_classes[i] != QString("rviz/FPSMotion"))
+    {
+      fallback_view_controller_property_->addOption(m_view_controller_classes[i], i);
+      m_view_controller.push_back(context_->getViewManager()->getViewAt(i));
+    }
+
+  }
+
+  fallback_view_controller_property_->show();
+  setFallbackViewController();
+}
+
+void FPSMotionTool::setFallbackToolProperty()
+{
+  fallback_tool_property_->clearOptions();
+  m_tools.clear();
+
+  m_tool_classes = context_->getToolManager()->getToolClasses();
+
+  for(int i = 0; i < m_tool_classes.size(); i++)
+  {
+    if(m_tool_classes[i] != getClassId())
+    {
+      fallback_tool_property_->addOption(m_tool_classes[i], i);
+      m_tools.push_back(context_->getToolManager()->getTool(i));
+    }
+  }
+
+  fallback_tool_property_->show();
+  setFallbackTool();
 }
 
 void FPSMotionTool::activate()
 {
-  m_config_widget = new FPSMotionConfigWidget(this);
+  context_->getViewManager()->setCurrentViewControllerType(QString("rviz/FPSMotion"));
+  setFallbackToolProperty();
+  setFallbackViewControllerProperty();
+
+  if(m_tool_classes.contains(QString("rviz/Select")))
+  {
+    m_removed_select = true;
+    context_->getToolManager()->removeTool(m_tool_classes.indexOf(QString("rviz/Select")));
+  }
 }
 
 void FPSMotionTool::deactivate()
 {
+
 }
 
 // Handling key events to label marked faces or to get db structure
@@ -66,37 +112,38 @@ int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
 {
   if(panel->getViewController()->getClassId().toStdString() != "rviz/FPSMotion")
   {
-    ROS_WARN("The FPS Motion Tool only works with an active rviz/FPSMotion ViewController. Please select it via the View Panel. \n Hopefully the switching will be automatized someday...");
+    ROS_WARN("The FPS Motion Tool only works with an active rviz/FPSMotion ViewController. \n If you use the shortkeys to select ('e') and deselect ('e') this tool, the switching will be automatized for you.");
   }
   else
   {
-    if (event->key() == Qt::Key_W)
+
+    if (event->key() == Qt::Key_W || event->key() == Qt::Key_Up && m_left_hand_mode)
     {
-      if(m_fly)
+      if(m_fly_mode)
         ((rviz::FPSMotionViewController*) panel->getViewController())->fly(0.0, 0.0, -m_pos_offset);
       else
         ((rviz::FPSMotionViewController*) panel->getViewController())->move(0.0, 0.0, -m_pos_offset);
     }
 
-    if (event->key() == Qt::Key_A)
+    if (event->key() == Qt::Key_A || event->key() == Qt::Key_Left && m_left_hand_mode)
     {
-      if(m_fly)
+      if(m_fly_mode)
       ((rviz::FPSMotionViewController*) panel->getViewController())->fly(-m_pos_offset, 0.0, 0.0);
       else
       ((rviz::FPSMotionViewController*) panel->getViewController())->move(-m_pos_offset, 0.0, 0.0);
     }
 
-    if (event->key() == Qt::Key_S)
+    if (event->key() == Qt::Key_S || event->key() == Qt::Key_Down && m_left_hand_mode)
     {
-      if(m_fly)
+      if(m_fly_mode)
         ((rviz::FPSMotionViewController*) panel->getViewController())->fly(0.0, 0.0, m_pos_offset);
       else
         ((rviz::FPSMotionViewController*) panel->getViewController())->move(0.0, 0.0, m_pos_offset);
     }
 
-    if (event->key() == Qt::Key_D)
+    if (event->key() == Qt::Key_D || event->key() == Qt::Key_Right && m_left_hand_mode)
     {
-      if(m_fly)
+      if(m_fly_mode)
         ((rviz::FPSMotionViewController*) panel->getViewController())->fly(m_pos_offset, 0.0, 0.0);
       else
         ((rviz::FPSMotionViewController*) panel->getViewController())->move(m_pos_offset, 0.0, 0.0);
@@ -105,22 +152,34 @@ int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
     // if 'f' is pressed switch walk/fly mode
     if (event->key() == Qt::Key_F)
     {
-      m_fly = !m_fly;
+      m_fly_mode = !m_fly_mode;
+      fly_property_->setValue(m_fly_mode);
+      fly_property_->show();
     }
 
     // if 'r' is pressed reset the view
     if (event->key() == Qt::Key_R)
     {
-      m_fly = false;
+      m_fly_mode = false;
+      fly_property_->setValue(m_fly_mode);
+      fly_property_->show();
+
       ((rviz::FPSMotionViewController*) panel->getViewController())->reset();
     }
 
-    // if 't' is pressed open the config widget
-    if (event->key() == Qt::Key_T)
+    // if 'e' is pressed deactivate tool and switch back into interactive mode
+    if (event->key() == Qt::Key_E)
     {
-      m_config_widget->exec();
+      context_->getToolManager()->setCurrentTool(m_fallback_tool);
+      context_->getViewManager()->setCurrentViewControllerType(m_fallback_view_controller);
+
+      if(m_removed_select)
+      {
+        context_->getToolManager()->addTool(QString("rviz/Select"));
+      }
     }
   }
+
   return Render;
 }
 
@@ -129,8 +188,8 @@ int FPSMotionTool::processMouseEvent(rviz::ViewportMouseEvent& event)
 {
   if (event.panel->getViewController())
   {
-  event.panel->getViewController()->handleMouseEvent(event);
-  setCursor( event.panel->getViewController()->getCursor() );
+    event.panel->getViewController()->handleMouseEvent(event);
+    setCursor( event.panel->getViewController()->getCursor() );
   }
   return 0;
 }

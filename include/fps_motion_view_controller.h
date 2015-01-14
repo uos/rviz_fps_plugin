@@ -59,6 +59,7 @@ public:
   void pitch( float angle );
   void move( float x, float y, float z );
   void fly( float x, float y, float z );
+  void changeZ(float z );
 
   virtual void handleMouseEvent(ViewportMouseEvent& evt);
 

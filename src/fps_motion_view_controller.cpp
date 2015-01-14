@@ -214,6 +214,13 @@ void FPSMotionViewController::move( float x, float y, float z )
   position_property_->add( update );
 }
 
+void FPSMotionViewController::changeZ(float z)
+{
+  Ogre::Vector3 translate( 0.0, 0.0, z );
+  Ogre::Vector3 update = getOrientation() * translate;
+  position_property_->add( translate );
+}
+
 void FPSMotionViewController::fly( float x, float y, float z )
 {
   Ogre::Vector3 translate( x, y, z );

@@ -91,6 +91,21 @@ public:
 private Q_SLOTS:
 
   void setOffset(){ m_pos_offset = (double) step_length_property_->getFloat(); }
+  void setBoost()
+  {
+    if(boost_property_->getFloat() < 0.0)
+    {
+      m_boost = 0.0;
+    }
+    else if(boost_property_->getFloat() > 1.0)
+    {
+      m_boost = 1.0;
+    }
+    else
+    {
+      m_boost = (double) boost_property_->getFloat();
+    }
+  }
   void setFlyMode(){ m_fly_mode = fly_property_->getBool(); }
   void setLeftHandMode(){ m_left_hand_mode = left_hand_property_->getBool(); }
   void setFallbackTool(){ m_fallback_tool = m_tools.at(fallback_tool_property_->getOptionInt()); }
@@ -105,6 +120,8 @@ private:
   bool m_removed_select;
 
   double m_pos_offset;
+  double m_boost;
+
   QStringList m_tool_classes;
   std::vector<Tool*> m_tools;
   Tool* m_fallback_tool;
@@ -116,6 +133,10 @@ private:
   FloatProperty* step_length_property_ = new FloatProperty( "Step Length", 0.1,
                                                             "The length by with the position is updated on each step.",
                                                             getPropertyContainer(), SLOT( setOffset() ), this );
+
+  FloatProperty* boost_property_ = new FloatProperty( "Boost Property", 0.5,
+                                                            "Gives the boost factor which is applied if pressing shift.",
+                                                            getPropertyContainer(), SLOT( setBoost() ), this );
 
   BoolProperty* fly_property_ = new BoolProperty( "Fly Mode", false,
                                                             "In fly mode it is possible to move along the z axis as well.",

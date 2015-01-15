@@ -56,7 +56,6 @@
 #include <rviz/default_plugin/tools/move_tool.h>
 
 #include <fps_motion_view_controller.h>
-#include <fps_motion_config_widget.h>
 
 /**
  *

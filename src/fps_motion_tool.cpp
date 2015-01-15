@@ -36,11 +36,33 @@ FPSMotionTool::FPSMotionTool()
 
 FPSMotionTool::~FPSMotionTool() {}
 
-// onInitialize() is called by the superclass after scene_manager_ and
-// context_ are set.  It should be called only once per instantiation.
 void FPSMotionTool::onInitialize()
 {
   setName( "FPS Motion" );
+
+  step_length_property_ = new FloatProperty( "Step Length", 0.1,
+                                                            "The length by with the position is updated on each step.",
+                                                            getPropertyContainer(), SLOT( setOffset() ), this );
+
+  boost_property_ = new FloatProperty( "Boost Property", 0.5,
+                                                            "Gives the boost factor which is applied if pressing shift.",
+                                                            getPropertyContainer(), SLOT( setBoost() ), this );
+
+  fly_property_ = new BoolProperty( "Fly Mode", false,
+                                                            "In fly mode it is possible to move along the z axis as well.",
+                                                            getPropertyContainer(), SLOT( setFlyMode() ), this );
+
+  left_hand_property_ = new BoolProperty( "Left Hand Mode", false,
+                                                            "In left hand mode one uses the arrows to move around, instead of wasd.",
+                                                            getPropertyContainer(), SLOT( setLeftHandMode() ), this );
+
+  fallback_tool_property_ = new EnumProperty( "Fallback Tool", QString("rviz/Interact"),
+                                                            "Determines to which tool the control switches, if the tool is deactivated.",
+                                                            getPropertyContainer(), SLOT( setFallbackTool() ), this );
+
+  fallback_view_controller_property_ = new EnumProperty( "Fallback ViewController", QString("rviz/Orbit"),
+                                                            "Determines to which view controller the control switches, if the tool is deactivated.",
+                                                            getPropertyContainer(), SLOT( setFallbackViewController() ), this );
   m_pos_offset = 0.1;
   m_boost = 0.5;
   m_fly_mode = false;

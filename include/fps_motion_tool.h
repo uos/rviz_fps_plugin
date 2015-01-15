@@ -130,32 +130,14 @@ private:
   QString m_fallback_view_controller;
   std::vector<ViewController*> m_view_controller;
 
-  FloatProperty* step_length_property_ = new FloatProperty( "Step Length", 0.1,
-                                                            "The length by with the position is updated on each step.",
-                                                            getPropertyContainer(), SLOT( setOffset() ), this );
-
-  FloatProperty* boost_property_ = new FloatProperty( "Boost Property", 0.5,
-                                                            "Gives the boost factor which is applied if pressing shift.",
-                                                            getPropertyContainer(), SLOT( setBoost() ), this );
-
-  BoolProperty* fly_property_ = new BoolProperty( "Fly Mode", false,
-                                                            "In fly mode it is possible to move along the z axis as well.",
-                                                            getPropertyContainer(), SLOT( setFlyMode() ), this );
-
-  BoolProperty* left_hand_property_ = new BoolProperty( "Left Hand Mode", false,
-                                                            "In left hand mode one uses the arrows to move around, instead of wasd.",
-                                                            getPropertyContainer(), SLOT( setLeftHandMode() ), this );
-
-  EnumProperty* fallback_tool_property_ = new EnumProperty( "Fallback Tool", QString("rviz/Interact"),
-                                                            "Determines to which tool the control switches, if the tool is deactivated.",
-                                                            getPropertyContainer(), SLOT( setFallbackTool() ), this );
+  FloatProperty* step_length_property_;
+  FloatProperty* boost_property_;
+  BoolProperty* fly_property_;
+  BoolProperty* left_hand_property_;
+  EnumProperty* fallback_tool_property_;
+  EnumProperty* fallback_view_controller_property_;
 
   void setFallbackToolProperty();
-
-  EnumProperty* fallback_view_controller_property_ = new EnumProperty( "Fallback ViewController", QString("rviz/Orbit"),
-                                                            "Determines to which view controller the control switches, if the tool is deactivated.",
-                                                            getPropertyContainer(), SLOT( setFallbackViewController() ), this );
-
   void setFallbackViewControllerProperty();
 };
 } // end namespace rviz

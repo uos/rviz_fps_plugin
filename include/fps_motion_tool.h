@@ -106,6 +106,7 @@ private Q_SLOTS:
       m_boost = (double) boost_property_->getFloat();
     }
   }
+
   void setFlyMode(){ m_fly_mode = fly_property_->getBool(); }
   void setLeftHandMode(){ m_left_hand_mode = left_hand_property_->getBool(); }
   void setFallbackTool(){ m_fallback_tool = m_tools.at(fallback_tool_property_->getOptionInt()); }
@@ -113,7 +114,6 @@ private Q_SLOTS:
 
 private:
   Ogre::SceneNode* m_sceneNode;
-
 
   bool m_fly_mode;
   bool m_left_hand_mode;

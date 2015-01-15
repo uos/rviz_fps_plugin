@@ -126,12 +126,8 @@ void FPSMotionTool::activate()
   }
 }
 
-void FPSMotionTool::deactivate()
-{
+void FPSMotionTool::deactivate(){ }
 
-}
-
-// Handling key events to label marked faces or to get db structure
 int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
 {
   if(panel->getViewController()->getClassId().toStdString() != "rviz/FPSMotion")
@@ -206,7 +202,7 @@ int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
       ((rviz::FPSMotionViewController*) panel->getViewController())->yaw(-update);
     }
 
-    // if 'f' is pressed switch walk/fly mode
+    // switch walk/fly mode
     if (event->key() == Qt::Key_F)
     {
       m_fly_mode = !m_fly_mode;
@@ -214,7 +210,7 @@ int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
       fly_property_->show();
     }
 
-    // if 'r' is pressed reset the view
+    // reset the view
     if (event->key() == Qt::Key_R)
     {
       m_fly_mode = false;
@@ -224,7 +220,7 @@ int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
       ((rviz::FPSMotionViewController*) panel->getViewController())->reset();
     }
 
-    // if 'e' is pressed deactivate tool and switch back into interactive mode
+    // deactivate tool and switch back into interactive mode
     if (event->key() == Qt::Key_E)
     {
       context_->getToolManager()->setCurrentTool(m_fallback_tool);
@@ -240,7 +236,6 @@ int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
   return Render;
 }
 
-// Handling mouse event and mark the clicked faces
 int FPSMotionTool::processMouseEvent(rviz::ViewportMouseEvent& event)
 {
   if (event.panel->getViewController())

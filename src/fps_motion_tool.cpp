@@ -32,6 +32,7 @@ namespace rviz
 FPSMotionTool::FPSMotionTool()
 {
   shortcut_key_ = 'q';
+  keep_control_ = true;
 }
 
 FPSMotionTool::~FPSMotionTool() {}

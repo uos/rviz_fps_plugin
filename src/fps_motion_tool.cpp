@@ -119,12 +119,6 @@ void FPSMotionTool::activate()
   context_->getViewManager()->setCurrentViewControllerType(QString("rviz/FPSMotion"));
   setFallbackToolProperty();
   setFallbackViewControllerProperty();
-
-  if(m_tool_classes.contains(QString("rviz/Select")))
-  {
-    m_removed_select = true;
-    context_->getToolManager()->removeTool(m_tool_classes.indexOf(QString("rviz/Select")));
-  }
 }
 
 void FPSMotionTool::deactivate(){ }
@@ -170,7 +164,6 @@ int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
       ((rviz::FPSMotionViewController*) panel->getViewController())->move(-update, 0.0, 0.0);
     }
 
-
     if ((event->key() == Qt::Key_D && !m_left_hand_mode) || (event->key() == Qt::Key_Right && m_left_hand_mode))
     {
       if(m_fly_mode)
@@ -180,7 +173,6 @@ int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
     }
 
     // move up / down
-
     if ((event->key() == Qt::Key_Up && !m_left_hand_mode) || (event->key() == Qt::Key_W && m_left_hand_mode))
     {
         ((rviz::FPSMotionViewController*) panel->getViewController())->changeZ(update);
@@ -192,7 +184,6 @@ int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
     }
 
     // yaw left / down
-
     if ((event->key() == Qt::Key_Left && !m_left_hand_mode) || (event->key() == Qt::Key_A && m_left_hand_mode))
     {
         ((rviz::FPSMotionViewController*) panel->getViewController())->yaw(update);
@@ -226,11 +217,6 @@ int FPSMotionTool::processKeyEvent(QKeyEvent *event, rviz::RenderPanel* panel)
     {
       context_->getToolManager()->setCurrentTool(m_fallback_tool);
       context_->getViewManager()->setCurrentViewControllerType(m_fallback_view_controller);
-
-      if(m_removed_select)
-      {
-        context_->getToolManager()->addTool(QString("rviz/Select"));
-      }
     }
   }
 

@@ -1,13 +1,24 @@
 rviz_fps_plugin
 ===============
 
-The rviz_fps_plugin package contains an additional ViewController and a Tool Plugin to navigate RViz like an FPS-Shooter.
+## Overview
 
-To enable the tool press 'q' and enable the 'FPSMotion' ViewController. Use the 'wasd' keys for walking.
-By pressing 'f' one can switch between walk or fly mode. By pressing 'r' you can reset the view controller.
+The rviz_fps_plugin package contains an additional ViewController and a Tool Plugin to navigate RViz like an FPS-Shooter using the keyboard.
 
+## Keyboard Control
 
-Third-Party Copyright:
+| Key           | Functionality        |
+| ------------- | -------------        |
+| Q             | Activate the Tool    |
+| W A S D       | Moving               |
+| Up Down       | Changing Height      |
+| Left Right    | Yaw Left Right       |
+| Shift         | Boosting Movements   |
+| F             | Toogle Move/Fly Mode |
+| R             | Reset the View Controller |
 
-"Walking" Icon by Dima Lagunov
-http://thenounproject.com/term/walking/26898/
+## Third-Party Copyright Disclaimer
+
+Icon ["Walking"](http://thenounproject.com/term/walking/26898/) by Dima Lagunov.
+
+All Icons from [The Noun Project](http://thenounproject.com).

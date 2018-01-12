@@ -8,8 +8,12 @@ link_directories(${catkin_LIBRARY_DIRS})
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++0x" )
 
 ## This plugin includes Qt widgets, so we must include Qt like so:
-find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED)
-include(${QT_USE_FILE})
+find_package(Qt5 REQUIRED COMPONENTS Widgets Core Gui)
+
+set(QT_LIBRARIES Qt5::Widgets)
+set(QTVERSION ${Qt5Widgets_VERSION})
+
+#include(${QT_USE_FILE})
 
 ## I prefer the Qt signals and slots to avoid defining "emit", "slots",
 ## etc because they can conflict with boost signals, so define QT_NO_KEYWORDS here.
@@ -17,7 +21,7 @@ add_definitions(-DQT_NO_KEYWORDS)
 
 ## Here we specify which header files need to be run through "moc",
 ## Qt's meta-object compiler.
-qt4_wrap_cpp(MOC_FILES
+qt5_wrap_cpp(MOC_FILES
   include/fps_motion_view_controller.h
   include/fps_motion_tool.h
 )

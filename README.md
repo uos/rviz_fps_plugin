@@ -1,6 +1,8 @@
 rviz_fps_plugin
 ===============
 
+*Now compatible with ROS Kinetic (and possibly newer ROS distros)!*
+
 ## Overview
 
 The rviz_fps_plugin package contains an additional ViewController and a Tool Plugin to navigate RViz like an FPS-Shooter using the keyboard.
